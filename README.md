@@ -23,6 +23,10 @@ The module exposes the following output variables:
 Due to the limitation of Terraform and Time Based rotation. You must execute the module regularly, on a frequency that is equal to or less than the configured number of days to rotate. If you do not, then you can run the risk of rotating out/deleting multiple API Keys on the next run. This can get to the extent that all your current API Keys are removed on a single run. This will prevent any current running process, that is currently using the older API Keys, from continuing to be able to log in and operate against your Confluent Cloud Resources.
 
 ## Resources
+[Best Practices for Using API Keys on Confluent Cloud](https://docs.confluent.io/cloud/current/security/authenticate/workload-identities/service-accounts/api-keys/best-practices-api-keys.html)
+
+[Nikoleta Verbeck shows how to use Terraform to rotate Confluent API Key(s)](https://github.com/nerdynick/terraform-confluent-api-key-rotation)
+
 [Terraform Resource time_rotating](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/rotating.html)
 
 [Terraform Hidden Gems! Secret Rotation with time_rotating](https://medium.com/cloud-native-daily/terraform-hidden-gems-secret-rotation-with-time-rotating-72ae8683ef7f)
