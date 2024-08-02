@@ -1,16 +1,18 @@
 terraform {
     cloud {
-        organization ="<TERRAFORM CLOUD ORGANIZATION NAME>"
+        #organization ="<TERRAFORM CLOUD ORGANIZATION NAME>"
+        organization = "signalroom"
 
         workspaces {
-            name = "<TERRAFORM CLOUD ORGANIZATION's WORKSPACE NAME>"
+            #name = "<TERRAFORM CLOUD ORGANIZATION's WORKSPACE NAME>"
+            name = "confluent-cloud-us-east"
         }
   }
 
   required_providers {
         confluent = {
             source  = "confluentinc/confluent"
-            version = "1.80.0"
+            version = "1.82.0"
         }
     }
 }
