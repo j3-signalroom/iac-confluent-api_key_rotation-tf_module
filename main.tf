@@ -1,11 +1,9 @@
 terraform {
     cloud {
-        #organization ="<TERRAFORM CLOUD ORGANIZATION NAME>"
-        organization = "signalroom"
+        organization ="<TERRAFORM CLOUD ORGANIZATION NAME>"
 
         workspaces {
-            #name = "<TERRAFORM CLOUD ORGANIZATION's WORKSPACE NAME>"
-            name = "confluent-cloud-us-east"
+            name = "<TERRAFORM CLOUD ORGANIZATION's WORKSPACE NAME>"
         }
   }
 
