@@ -1,45 +1,69 @@
-# IaC Confluent Cloud Resource API Key Rotation Terraform module
+# IaC Confluent API Key Rotation Terraform module
+This Terraform [module](https://developer.hashicorp.com/terraform/language/modules) is designed to manage the creation and rotation of Confluent Cloud Resource [API Keys](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html). The key rotation is triggered based on the number of days since the key's creation, ensuring that keys are regularly updated for enhanced security. You can also configure the module to retain a specific number of API Keys per [Service Account](https://docs.confluent.io/cloud/current/access-management/identity/service-accounts/overview.html), giving you flexibility in how keys are managed.
+
+A Terraform module is essentially a collection of [input](https://developer.hashicorp.com/terraform/language/values/variables) and [output](https://developer.hashicorp.com/terraform/language/values/outputs) variables, resources, and configuration files that encapsulate specific functionality. By defining input variables, you can customize the module's behavior without altering its source code, making it adaptable to various use cases. Output variables provide information that can be used by other modules or configurations. This modular approach not only promotes reusability and composability but also simplifies the sharing of standardized configurations across different Terraform setups, enabling more efficient and consistent infrastructure management.
 
 **Table of Contents**
 
 <!-- toc -->
-+ [Purpose](#purpose)
-    - [Module Input Variables](#module-input-variables)
-    - [Module Output Variables](#module-output-variables)
-+ [How to use this repo?](#how-to-use-this-repo)
-+ [Important Note](#important-note)
++ [Let's get started!](#lets-get-started)
 + [Resources](#resources)
 <!-- tocstop -->
 
-## Purpose
-This Terraform [module](https://developer.hashicorp.com/terraform/language/modules) handles the creation and rotation of Confluent Cloud Resource [API Key](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html).  The rotation of keys is based on the number of days since creation and you can retain a configurable number of API Key per [Service Account](https://docs.confluent.io/cloud/current/access-management/identity/service-accounts/overview.html).
+## Let's get started!
 
-A Terraform module consists of [input](https://developer.hashicorp.com/terraform/language/values/variables) and [output](https://developer.hashicorp.com/terraform/language/values/outputs) variables, which enables me to customize aspects of the module without altering its source code.  This feature makes it easy for me to share the module across different Terraform configurations, allowing for composability and reusability.
+> **Important Notice**
+>
+> To ensure seamless operation and avoid potential disruptions when using Terraform with time-based rotation, it’s crucial to regularly execute the module within the specified rotation period. Specifically, the execution frequency should match or exceed the configured rotation interval for API key. Failing to adhere to this schedule risks the deletion of multiple key pairs in a single execution cycle. Such an occurrence could potentially remove all active API keys, thereby disrupting any processes that rely on older keys for accessing Snowflake resources. To maintain uninterrupted access and functionality, it is imperative to keep the module execution timely and consistent with the rotation settings.
 
-### Module Input Variables
-A Terraform configuration provides values for the module input variables to initiate the creation and rotation of the Confluent Cloud Resource API Key.  Below are the input variables:
-Variable|Required|Description
--|-|-
-`confluent_cloud_api_key`|Yes|Specifies the Confluent Cloud API Key (also referred as Cloud API ID)
-`confluent_cloud_api_secret`|Yes|Specifies the Confluent Cloud API Secret
-`day_count`|No|[_Defaults to 30 days_]  Specifies how many day(s) should the API Key be rotated for
-`number_of_api_keys_to_retain`|No|[_Defaults to 2 API Keys_]  Specifies the number of API Keys to retain
-`key_display_name`|No|[_Defaults to a display name with current date_]  Specifies the name of the human-readable name for the API Key
-`owner`|Yes|Specifies the API Key Owner.  Refer to [Confluent API Key Docs](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/resources/confluent_api_key#argument-reference) for more info 
-`resource`|Yes|Specifies the API Key Resource associated with it.  Refer to [Confluent API Key Docs](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/resources/confluent_api_key#argument-reference) for more details
+**These are the steps**
 
-### Module Output Variables
-After the module is executed, it will output the following variables:
-Variable|Description
--|-
-`active_api_key`|Specifies the current active API Key to be used for new logins.  Refer to [confluent/confluent_api_key](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/resources/confluent_api_key) for the expected structure
-`all_api_keys`|Specifies all API Keys sorted by creation date.  With the current active API Key being the 1st in the collection
+1. Take care of the cloud environment prequisities listed below:
+    > You need to have the following cloud accounts:
+    > - [Confluent Cloud Account](https://confluent.cloud/)
+    > - [GitHub Account](https://github.com) *with OIDC configured for AWS*
+    > - [Terraform Cloud Account](https://app.terraform.io/)
 
-## How to use this repo?
-In the [main.tf](main.tf) replace **`<TERRAFORM CLOUD ORGANIZATION NAME>`** in the `terraform.cloud` block with your [Terraform Cloud Organization Name](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/organizations) and **`<TERRAFORM CLOUD ORGANIZATION's WORKSPACE NAME>`** in the `terraform.cloud.workspaces` block with your [Terraform Cloud Organization's Workspaces Name](https://developer.hashicorp.com/terraform/cloud-docs/workspaces).
+2. Clone the repo:
+    ```shell
+    git clone https://github.com/j3-signalroom/iac-snowflake-user-rsa_key_pairs_rotation-tf_module.git
+    ```
 
-## Important Note
-> Due to the limitation of Terraform and Time Based rotation. You must execute the module regularly, on a frequency that is equal to or less than the configured number of days to rotate. If you do not, then you can run the risk of rotating out/deleting multiple API Keys on the next run. This can get to the extent that all your current API Keys are removed on a single run. This will prevent any current running process, that is currently using the older API Keys, from continuing to be able to log in and operate against your Confluent Cloud Resources.
+3. Update the cloned Terraform module's [main.tf](main.tf) by following these steps:
+
+    a. Locate the `terraform.cloud` block and replace **`signalroom`** with your [Terraform Cloud Organization Name](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/organizations).
+
+    b. In the `terraform.cloud.workspaces` block, replace **`snowflake-user-rsa-key-generator-workspace`** with your [Terraform Cloud Organization's Workspaces Name](https://developer.hashicorp.com/terraform/cloud-docs/workspaces).
+
+4.  Deploy your Terraform module to GitHub by following these steps:
+
+	a. **Commit your module:**  Ensure all changes to your Terraform module are committed to your local Git repository.
+
+	b. **Push to GitHub:**  Push your committed changes to your GitHub repository.  This makes the module available for use in other projects.
+
+	c. **Add a Module Block:**  In the Terraform configuration where you want to use the module, add a module block.  Inside this block, include the following:
+
+	*Source*: Reference the GitHub repository URL where your module is stored.
+
+	*Version*: Specify the appropriate branch, tag, or commit hash to ensure you’re using the correct version of the module.
+
+    d. **Pass Input Variables:**  Within the same module block, pass the required input variables by defining them as key-value pairs:
+    Input Variable|Variable Required|Description
+    -|-|-
+    `confluent_cloud_api_key`|Yes|Specifies the Confluent Cloud API Key (also referred as Cloud API ID)
+    `confluent_cloud_api_secret`|Yes|Specifies the Confluent Cloud API Secret
+    `day_count`|No|[_Defaults to 30 days_]  Specifies how many day(s) should the API Key be rotated for
+    `number_of_api_keys_to_retain`|No|[_Defaults to 2 API Keys_]  Specifies the number of API Keys to retain
+    `key_display_name`|No|[_Defaults to a display name with current date_]  Specifies the name of the human-readable name for the API Key
+    `owner`|Yes|Specifies the API Key Owner.  Refer to [Confluent API Key Docs](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/resources/confluent_api_key#argument-reference) for more info 
+    `resource`|Yes|Specifies the API Key Resource associated with it.  Refer to [Confluent API Key Docs](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/resources/confluent_api_key#argument-reference) for more details
+
+    e. **Output Variables:**
+    Output Variable|Description
+    -|-
+    `active_api_key`|Specifies the current active API Key to be used for new logins.  Refer to [confluent/confluent_api_key](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/resources/confluent_api_key) for the expected structure
+    `all_api_keys`|Specifies all API Keys sorted by creation date.  With the current active API Key being the 1st in the collection
+
 
 ## Resources
 [Best Practices for Using API Keys on Confluent Cloud](https://docs.confluent.io/cloud/current/security/authenticate/workload-identities/service-accounts/api-keys/best-practices-api-keys.html)
