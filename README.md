@@ -1,5 +1,5 @@
 # IaC Confluent API Key Rotation Terraform module
-This Terraform [module](https://developer.hashicorp.com/terraform/language/modules) is designed to manage the creation and rotation of Confluent Cloud Resource [API Keys](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html). The key rotation is triggered based on the number of days since the key's creation, ensuring that keys are regularly updated for enhanced security. You can also configure the module to retain a specific number of API Keys per [Service Account](https://docs.confluent.io/cloud/current/access-management/identity/service-accounts/overview.html), giving you flexibility in how keys are managed.
+This Terraform [module](https://developer.hashicorp.com/terraform/language/modules) is designed to manage the creation and rotation of Confluent [API Keys](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html). The key rotation is triggered based on the number of days since the key's creation, ensuring that keys are regularly updated for enhanced security. You can also configure the module to retain a specific number of API Keys per [Service Account](https://docs.confluent.io/cloud/current/access-management/identity/service-accounts/overview.html), giving you flexibility in how keys are managed.
 
 A Terraform module is essentially a collection of [input](https://developer.hashicorp.com/terraform/language/values/variables) and [output](https://developer.hashicorp.com/terraform/language/values/outputs) variables, resources, and configuration files that encapsulate specific functionality. By defining input variables, you can customize the module's behavior without altering its source code, making it adaptable to various use cases. Output variables provide information that can be used by other modules or configurations. This modular approach not only promotes reusability and composability but also simplifies the sharing of standardized configurations across different Terraform setups, enabling more efficient and consistent infrastructure management.
 
@@ -20,7 +20,7 @@ A Terraform module is essentially a collection of [input](https://developer.hash
 
 1. Take care of the cloud environment prequisities listed below:
     > You need to have the following cloud accounts:
-    > - [Confluent Cloud Account](https://confluent.cloud/)
+    > - [Confluent Account](https://confluent.cloud/)
     > - [GitHub Account](https://github.com) *with OIDC configured for AWS*
     > - [Terraform Cloud Account](https://app.terraform.io/)
 
@@ -50,8 +50,8 @@ A Terraform module is essentially a collection of [input](https://developer.hash
     d. **Pass Input Variables:**  Within the same module block, pass the required input variables by defining them as key-value pairs:
     Input Variable|Variable Required|Description
     -|-|-
-    `confluent_cloud_api_key`|Yes|Specifies the Confluent Cloud API Key (also referred as Cloud API ID)
-    `confluent_cloud_api_secret`|Yes|Specifies the Confluent Cloud API Secret
+    `confluent_api_key`|Yes|Specifies the Confluent API Key (also referred as Cloud API ID)
+    `confluent_api_secret`|Yes|Specifies the Confluent API Secret
     `day_count`|No|[_Defaults to 30 days_]  Specifies how many day(s) should the API Key be rotated for
     `number_of_api_keys_to_retain`|No|[_Defaults to 2 API Keys_]  Specifies the number of API Keys to retain
     `key_display_name`|No|[_Defaults to a display name with current date_]  Specifies the name of the human-readable name for the API Key
