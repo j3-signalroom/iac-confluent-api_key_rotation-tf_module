@@ -1,10 +1,10 @@
-variable "confluent_cloud_api_key" {
-    description = "Confluent Cloud API Key (also referred as Cloud API ID)."
+variable "confluent_api_key" {
+    description = "Confluent API Key (also referred as Cloud API ID)."
     type        = string  
 }
 
-variable "confluent_cloud_api_secret" {  
-    description = "Confluent Cloud API Secret."
+variable "confluent_api_secret" {  
+    description = "Confluent API Secret."
     type        = string  
     sensitive   = true
 }
@@ -34,7 +34,7 @@ variable "number_of_api_keys_to_retain" {
 variable "key_display_name" {
     description = "A descriptive name for the API key."
     type = string
-    default = "Confluent Cloud Service Account API Key - {date} - Managed by Terraform Confluent"
+    default = "Confluent Service Account API Key - {date} - Managed by Terraform Confluent"
 }
 
 variable "owner" {
