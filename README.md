@@ -6,11 +6,11 @@ A Terraform module is essentially a collection of [input](https://developer.hash
 **Table of Contents**
 
 <!-- toc -->
-+ [Let's get started!](#lets-get-started)
-+ [Resources](#resources)
++ [1.0 Let's get started!](#10-lets-get-started)
++ [2.0 Resources](#20-resources)
 <!-- tocstop -->
 
-## Let's get started!
+## 1.0 Let's get started!
 
 > **Important Notice**
 >
@@ -65,7 +65,7 @@ A Terraform module is essentially a collection of [input](https://developer.hash
     `all_api_keys`|Specifies all API Keys sorted by creation date.  With the current active API Key being the 1st in the collection
 
 
-## Resources
+## 2.0 Resources
 [Best Practices for Using API Keys on Confluent Cloud](https://docs.confluent.io/cloud/current/security/authenticate/workload-identities/service-accounts/api-keys/best-practices-api-keys.html)
 
 [Nikoleta Verbeck shows how to use Terraform to rotate Confluent API Key(s)](https://github.com/nerdynick/terraform-confluent-api-key-rotation)
