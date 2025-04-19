@@ -5,6 +5,9 @@ The format is base on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 
 
 
 ## [0.15.00.000] - TBD
+### Changed
+- Updated the Terraform Confluent Provider to `2.25.0`.
+
 ### Fixed
 - Issue [#32](https://github.com/j3-signalroom/iac-confluent-api_key_rotation-tf_module/issues/32)
 
