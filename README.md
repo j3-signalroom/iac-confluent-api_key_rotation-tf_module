@@ -7,6 +7,7 @@ A Terraform module is essentially a collection of [input](https://developer.hash
 
 <!-- toc -->
 + [1.0 Let's get started!](#10-lets-get-started)
+    - [1.1 Visualizing the Terraform Configuration](#11-visualizing-the-terraform-configuration)
 + [2.0 Resources](#20-resources)
 <!-- tocstop -->
 
@@ -64,6 +65,18 @@ A Terraform module is essentially a collection of [input](https://developer.hash
     `active_api_key`|Specifies the current active API Key to be used for new logins.  Refer to [confluent/confluent_api_key](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/resources/confluent_api_key) for the expected structure
     `all_api_keys`|Specifies all API Keys sorted by creation date.  With the current active API Key being the 1st in the collection
 
+### 1.1 Visualizing the Terraform Configuration
+Below is the Terraform visualization of the Terraform configuration. It shows the resources and their dependencies, making the infrastructure setup easier to understand.
+
+![Terraform Visulization](.blog/images/terraform-visualization.png)
+
+> **To fully view the image, open it in another tab on your browser to zoom in.**
+
+When you update the Terraform Configuration, to update the Terraform visualization, use the [`terraform graph`](https://developer.hashicorp.com/terraform/cli/commands/graph) command with [Graphviz](https://graphviz.org/) to generate a visual representation of the resources and their dependencies.  To do this, run the following command:
+
+```bash
+terraform graph | dot -Tpng > .blog/images/terraform-visualization.png
+```
 
 ## 2.0 Resources
 [Best Practices for Using API Keys on Confluent Cloud](https://docs.confluent.io/cloud/current/security/authenticate/workload-identities/service-accounts/api-keys/best-practices-api-keys.html)
