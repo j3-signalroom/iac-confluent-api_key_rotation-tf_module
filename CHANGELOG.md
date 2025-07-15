@@ -8,6 +8,9 @@ The format is base on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 
 ### Added
 - Issue [#46](https://github.com/j3-signalroom/iac-confluent-api_key_rotation-tf_module/issues/46)
 
+### Changed
+- Issue [#48](https://github.com/j3-signalroom/iac-confluent-api_key_rotation-tf_module/issues/48)
+
 ## [0.16.00.000] - 2025-05-19
 ### Added
 - Issue [#39](https://github.com/j3-signalroom/iac-confluent-api_key_rotation-tf_module/issues/39)
