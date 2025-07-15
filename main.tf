@@ -3,7 +3,7 @@ terraform {
         organization = "signalroom"
 
         workspaces {
-            name = "iac-confluent-api-key-rotation-workspace"
+            name = "iac-confluent-api-key-rotation--tf-module-workspace"
         }
   }
 
