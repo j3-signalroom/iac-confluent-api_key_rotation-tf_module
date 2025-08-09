@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is base on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.18.00.000] - 2025-08-09
+### Added
+- Issue [#52](https://github.com/j3-signalroom/iac-confluent-api_key_rotation-tf_module/issues/52)
+
 ## [0.17.00.000] - 2025-07-15
 ### Added
 - Issue [#46](https://github.com/j3-signalroom/iac-confluent-api_key_rotation-tf_module/issues/46)
