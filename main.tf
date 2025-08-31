@@ -5,12 +5,13 @@ terraform {
         workspaces {
             name = "iac-confluent-api-key-rotation-tf-module-workspace"
         }
-  }
+    }
 
-  required_providers {
+    # Use the latest minor and patch versions, but not a major version
+    required_providers {
         confluent = {
             source  = "confluentinc/confluent"
-            version = ">= 2.37.0"
+            version = "~> 2.0"
         }
     }
 }
