@@ -21,6 +21,9 @@ resource "confluent_api_key" "resouce_api_key" {
         }
     }
 
+    # To skip DNS-dependent validation:
+    disable_wait_for_ready = var.disable_wait_for_ready
+
     lifecycle {
         replace_triggered_by = [time_static.api_key_rotations[count.index]]
     }
