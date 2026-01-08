@@ -57,3 +57,9 @@ variable "resource" {
         })
     })    
 }
+
+variable "disable_wait_for_ready" {
+  description = "Whether to skip waiting for API key to sync (set true for PrivateLink clusters when running outside VPC)"
+  type        = bool
+  default     = false
+}
