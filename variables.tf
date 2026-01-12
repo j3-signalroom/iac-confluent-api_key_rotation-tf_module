@@ -1,14 +1,3 @@
-variable "confluent_api_key" {
-    description = "Confluent API Key (also referred as Cloud API ID)."
-    type        = string  
-}
-
-variable "confluent_api_secret" {  
-    description = "Confluent API Secret."
-    type        = string  
-    sensitive   = true
-}
-
 variable "day_count" {
     description = "How many day(s) should the API Key be rotated for."
     type = number
