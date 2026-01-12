@@ -44,8 +44,6 @@ A Terraform module is essentially a collection of [input](https://developer.hash
     d. **Pass Input Variables:**  Within the same module block, pass the required input variables by defining them as key-value pairs:
     Input Variable|Variable Required|Description
     -|-|-
-    `confluent_api_key`|Yes|Specifies the Confluent API Key (also referred as Cloud API ID)
-    `confluent_api_secret`|Yes|Specifies the Confluent API Secret
     `day_count`|No|[_Defaults to 30 days_]  Specifies how many day(s) should the API Key be rotated for
     `number_of_api_keys_to_retain`|No|[_Defaults to 2 API Keys_]  Specifies the number of API Keys to retain
     `key_display_name`|No|[_Defaults to a display name with current date_]  Specifies the name of the human-readable name for the API Key
